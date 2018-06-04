@@ -1,0 +1,106 @@
+<html>
+<head>
+  <title>Project Creator</title>
+  <meta http-equiv="x-ua-compatible" content="ie=9">
+  <hta:application 
+     id="PCreator"
+     applicationname="ProjectCreator"
+     version="1"
+  </hta>
+</head>
+<style>
+html,body {
+	font-size: 15px; 
+	font-family:calibri;
+	
+}
+
+body {
+	margin-left: 20px;
+
+}
+
+select {
+	height: 20px;
+	border-radius: 2px;
+	border: 1px solid #ededed;
+}
+
+h1,h2 {
+	color: #FF5A10;
+	font-size: 24px;
+
+}
+
+.bouton  {
+	padding: 10px 10px;
+	border-radius: 2px;
+	border-style: none;
+}
+	
+.bouton:hover {
+	color: #FFFFFF;
+	background-color: #FF5A10;
+}
+
+#bouton {
+	margin-top: 20px;
+
+}
+
+label {
+	margin-right: 5px;
+
+
+}
+
+i {
+	color: #FF5A10;
+
+
+}
+
+</style>
+<body onload="window.resizeTo(450,380)">
+	<h1>
+		Project Creator:
+	</h1>
+	<div>
+		<label for="Folder">Project name:</label>
+		<input id="Folder" type="text" name="Create_Folder">
+	</div>
+	<div id="bouton">
+		<button class="bouton" type="button" onclick="folder_create()">
+			Create project
+		</button>
+	</div>
+	<div id="instruction">
+		<h2>Proc&#233;dure:</h2>
+		<ul>
+			<li>Placer le fichier .hta &#224; l&#39;endroit o&#249; vous souhaitez </br>cr&#233;er votre projet</li>
+			<li>Entrez le nom du projet dans le champs <i>Project name</i></li>
+			<li>Cliquez sur <i>Create project</i></li>
+			<li>Et voil&#224; votre projet est cr&#233;&#233; !</li>
+		</ul>
+	</div>
+	<script language="JavaScript" type="text/javascript">
+		ActiveX = new ActiveXObject("Scripting.FileSystemObject");
+		
+		
+		function folder_create() {
+			var path = document.getElementById("Folder").value;
+			if (ActiveX.FolderExists(path)) {
+			
+			alert("Folder already exist !");
+			
+			} else {
+			ActiveX.CreateFolder(".\\"+ path +"\\");
+			ActiveX.CreateTextFile(".\\"+ path +"\\Readme.txt",false);
+			ActiveX.CreateFolder(".\\"+ path +"\\01_Ressources\\");
+			ActiveX.CreateFolder(".\\"+ path +"\\02_Render\\");
+			ActiveX.CreateFolder(".\\"+ path +"\\03_Files\\");
+			}
+		}
+	</script>
+</body>
+</html>
