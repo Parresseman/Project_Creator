@@ -66,6 +66,7 @@ i {
 	margin-top: 10px;
     width: 100%;
     background-color: #f9f9f9;
+	
 }
 #myBar {
 	border-radius: 3px;
@@ -77,6 +78,7 @@ i {
 	line-height: 30px;
 	white-space: nowrap;
 }
+
 
 </style>
 <body onload="window.resizeTo(470,400)">
@@ -93,7 +95,8 @@ i {
 		</button>
 	</div>
 	<div id="myProgress">
-		<div id="myBar"></div>
+		<div id="myBar">
+		</div>
 	</div>
 	<div id="instruction">
 		<h2>Proc&#233;dure:</h2>
@@ -114,25 +117,39 @@ i {
 			
 			alert("Folder already exist !");
 			
+			} else if (path==""){
+			
+			alert("Insert a project name !");
+			
 			} else {
-			ActiveX.CreateFolder(".\\"+ path +"\\");
-			ActiveX.CreateTextFile(".\\"+ path +"\\Readme.txt",false);
-			ActiveX.CreateFolder(".\\"+ path +"\\01_Ressources\\");
-			ActiveX.CreateFolder(".\\"+ path +"\\02_Render\\");
-			ActiveX.CreateFolder(".\\"+ path +"\\03_Files\\");
-			}
+			var id = setInterval(frame, 10);
 			var elem = document.getElementById("myBar");
 			var width = 10;
-			var id = setInterval(frame, 10);
+			var val = [ActiveX.CreateFolder(".\\"+ path +"\\"), ActiveX.CreateTextFile(".\\"+ path +"\\Readme.txt",false), ActiveX.CreateFolder(".\\"+ path +"\\01_Ressources\\"), ActiveX.CreateFolder(".\\"+ path +"\\02_Render\\"), ActiveX.CreateFolder(".\\"+ path +"\\03_Files\\")];
+			var i = 0;
 			function frame() {
 				if (width >= 100) {
+					width = 100;
+					elem.style.width = width + '%';
+					elem.innerHTML = width * 1 + '%';				
 					clearInterval(id);
-				} else {
+				} else if (i < 4) {
+					val[i];
 					width++;
 					elem.style.width = width + '%';
 					elem.innerHTML = width * 1 + '%';
+					i++;				
+				
+				} else {
+					width = 100;
+					elem.style.width = width + '%';
+					elem.innerHTML = width * 1 + '%';					
+				
 				}
+				
 			}
+	
+			}				
 		}
 	</script>
 </body>
