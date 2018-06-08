@@ -1,7 +1,7 @@
 # Project_Creator
 
 <p align="center">
-  <img src="http://lutim.cpy.re/69CWJGUx.PNG" alt="main windows" />
+  <img src="http://lutim.cpy.re/zUlBkOXz.PNG" alt="main windows" />
 </p>
 
 # Description
