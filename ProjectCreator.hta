@@ -70,7 +70,7 @@ i {
 }
 #myBar {
 	border-radius: 3px;
-    width: 1%;
+    width: 0%;
     height: 30px;
     background-color: #FF5A10;
 	text-align: center;
@@ -93,6 +93,9 @@ i {
 		<button class="bouton" type="button" onclick="folder_create()">
 			Create project
 		</button>
+		<button class="bouton" type="button" onclick="test()">
+			Test
+		</button>
 	</div>
 	<div id="myProgress">
 		<div id="myBar">
@@ -110,6 +113,10 @@ i {
 	<script language="JavaScript" type="text/javascript">
 		ActiveX = new ActiveXObject("Scripting.FileSystemObject");
 		
+		function test() {
+			alert("null");
+		}
+		
 		
 		function folder_create() {
 			var path = document.getElementById("Folder").value;
@@ -125,7 +132,29 @@ i {
 			var id = setInterval(frame, 10);
 			var elem = document.getElementById("myBar");
 			var width = 10;
-			var val = [ActiveX.CreateFolder(".\\"+ path +"\\"), ActiveX.CreateTextFile(".\\"+ path +"\\Readme.txt",false), ActiveX.CreateFolder(".\\"+ path +"\\01_Ressources\\"), ActiveX.CreateFolder(".\\"+ path +"\\02_Render\\"), ActiveX.CreateFolder(".\\"+ path +"\\03_Files\\")];
+			var val = [
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\") }, 
+				function() { ActiveX.CreateTextFile(".\\"+ path +"\\Readme.txt",false) }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\01_Pre_Prod\\") }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\02_Prod\\") }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\03_Post_Prod\\") }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\01_Pre_Prod\\01_Script\\") }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\01_Pre_Prod\\02_VoiceActing\\") }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\01_Pre_Prod\\03_Storyboard\\") },
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\01_Pre_Prod\\04_Animatique\\") }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\01_Pre_Prod\\05_BG_Layout\\") }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\01_Pre_Prod\\06_Render\\") }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\02_Prod\\01_Animation_Clean\\") }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\02_Prod\\02_BG_Clean\\") }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\02_Prod\\02_BG_coloring\\") }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\02_Prod\\03_Render\\") }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\03_Post_Prod\\01_Animation_Ink\\") }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\03_Post_Prod\\02_Compositing\\") }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\03_Post_Prod\\03_Render\\") }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\03_Post_Prod\\04_SoundFX\\") }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\03_Post_Prod\\05_Editing\\") }, 
+				function() { ActiveX.CreateFolder(".\\"+ path +"\\03_Post_Prod\\06_Output_EXp\\") } 
+			];			
 			var i = 0;
 			function frame() {
 				if (width >= 100) {
@@ -133,8 +162,8 @@ i {
 					elem.style.width = width + '%';
 					elem.innerHTML = width * 1 + '%';				
 					clearInterval(id);
-				} else if (i < 4) {
-					val[i];
+				} else if (i < 21) {
+					val[i]();
 					width++;
 					elem.style.width = width + '%';
 					elem.innerHTML = width * 1 + '%';
